@@ -1,4 +1,6 @@
-﻿while (true)
+﻿List<string> history = new List<string>();
+
+while (true)
 {
     double result;
 
@@ -21,20 +23,24 @@
         case 1:
             result = numberOne + numberTwo;
             Console.WriteLine($"{numberOne} + {numberTwo} = {result}");
+            history.Add($"{numberOne} + {numberTwo} = {result}");
             break;
         case 2:
             result = numberOne - numberTwo;
             Console.WriteLine($"{numberOne} - {numberTwo} = {result}");
+            history.Add($"{numberOne} - {numberTwo} = {result}");
             break;
         case 3:
             result = numberOne * numberTwo;
             Console.WriteLine($"{numberOne} * {numberTwo} = {result}");
+            history.Add($"{numberOne} * {numberTwo} = {result}");
             break;
         case 4:
             if (numberTwo != 0)
             {
                 result = numberOne / numberTwo;
                 Console.WriteLine($"{numberOne} / {numberTwo} = {result}");
+                history.Add($"{numberOne} / {numberTwo} = {result}");
                 break;
             }
             else
@@ -47,13 +53,24 @@
             continue;
     }
 
-    Console.WriteLine("Do you want to perform another calculation? (Y/N)");
+    Console.WriteLine("Do you want to perform another calculation or see the calculation historian? (Y/N/H)");
     string continueCalc = Console.ReadLine();
 
-    if (continueCalc.ToUpper() != "Y")
+    if (continueCalc.ToUpper() == "N")
     {
         Console.WriteLine("Turning off the calculator. Goodbye!");
         break;
+    }
+    
+    if (continueCalc.ToUpper() == "H") {
+        Console.Clear();
+        Console.WriteLine("Calculation History:");
+        foreach (var record in history)
+        {
+            Console.WriteLine(record);
+        }
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
     }
 
     Console.Clear();
